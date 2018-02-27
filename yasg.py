@@ -4,11 +4,11 @@ import pygame
 import random
 import sys
 
-RESX=1200
-RESY=800
+RESX=800
+RESY=600
 
 class Snake(list):
-    def __init__(self,screen,length=2,size=20,color=(255,255,255),width=5):
+    def __init__(self,screen,length=2,size=20,color=(255,255,255),width=0):
         list.__init__(self)
         self.collision=False
         self.size=size
@@ -36,7 +36,7 @@ class Snake(list):
         return self.collision
             
 class Apple():
-    def __init__(self,screen,size=20,color=(255,0,0),width=5):
+    def __init__(self,screen,size=20,color=(255,0,0),width=0):
         self.x=size
         self.y=size
         self.screen=screen
@@ -90,5 +90,5 @@ while True:
         pygame.quit()
         sys.exit()
     pygame.display.flip()
-    pygame.time.wait(100)
+    pygame.time.wait(150)
 

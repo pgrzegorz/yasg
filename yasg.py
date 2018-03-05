@@ -6,6 +6,9 @@ import sys
 
 RESX=800
 RESY=600
+PANEL_HEIGHT=40
+INFO_TEXT="SCORE: "
+TEXT_MARIGN=2
 
 class Snake(list):
     def __init__(self,screen,length=2,size=20,color=(255,255,255),width=0):
@@ -52,15 +55,27 @@ class Apple():
     def draw(self):
         pygame.draw.rect(self.screen,self.color,self.rect,self.width)
 
+
+
 res=(RESX,RESY)
 
 pygame.init()
 screen = pygame.display.set_mode(res)
-s=Snake(screen,2,20)
-a=Apple(screen)
 
 x_direction=0
 y_direction=0
+
+boardsize=(RESX,RESY-PANEL_HEIGHT)
+panelsize=(RESX,PANEL_HEIGHT)
+board=pygame.Surface(boardsize)
+panel=pygame.Surface(panelsize)
+s=Snake(board,2,20)
+a=Apple(board)
+text=pygame.font.SysFont("monospace",PANEL_HEIGHT-TEXT_MARIGN/2, True)
+
+score=0
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -79,16 +94,23 @@ while True:
             if event.key == pygame.K_RIGHT:
                 x_direction=1
                 y_direction=0
+
     s.move(x_direction,y_direction)
-    screen.fill((0,0,0))
+    board.fill((0,0,0))
+    panel.fill((30,30,30))
+    label=text.render(INFO_TEXT + str(score),1,(255,255,255))
+    panel.blit(label,(TEXT_MARIGN,TEXT_MARIGN))
     s.draw()
     if a.rect.colliderect(s[0]):
         s.grow()
         a.put()
+        score+=1
     a.draw()
     if s.collide():
         pygame.quit()
         sys.exit()
+    screen.blit(board,(0,PANEL_HEIGHT))
+    screen.blit(panel,(0,0))
     pygame.display.flip()
     pygame.time.wait(150)
 

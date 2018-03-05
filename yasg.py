@@ -34,7 +34,8 @@ class Snake(list):
         self.collision=False
         if self[0].collidelist(self[1:]) > 0 :
             self.collision=True
-        if s[0][0]>RESX-s.size or s[0][0]<0 or s[0][1]>RESY-s.size or s[0][1]<0:
+        if s[0][0]>self.screen.get_width()-s.size or s[0][0]<0 or\
+           s[0][1]>self.screen.get_height()-s.size or s[0][1]<0:
             self.collision=True
         return self.collision
             
@@ -47,6 +48,7 @@ class Apple():
         self.color=color
         self.width=width
         self.rect=pygame.Rect(self.x,self.y,self.size,self.size)
+        self.put()
     def put(self):
         self.x=random.randrange(0,self.screen.get_width(),self.size)
         self.y=random.randrange(0,self.screen.get_height(),self.size)

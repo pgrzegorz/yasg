@@ -71,7 +71,7 @@ board=pygame.Surface(boardsize)
 panel=pygame.Surface(panelsize)
 s=Snake(board,2,20)
 a=Apple(board)
-text=pygame.font.SysFont("monospace",PANEL_HEIGHT-TEXT_MARIGN/2, True)
+text=pygame.font.SysFont("monospace",PANEL_HEIGHT-TEXT_MARIGN//2, True)
 
 score=0
 

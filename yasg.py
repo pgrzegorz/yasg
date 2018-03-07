@@ -38,6 +38,8 @@ class Snake(list):
            s[0][1]>self.screen.get_height()-s.size or s[0][1]<0:
             self.collision=True
         return self.collision
+    def get_head(self):
+        return self[0]
             
 class Apple():
     def __init__(self,screen,size=20,color=(255,0,0),width=0):
@@ -103,7 +105,7 @@ while True:
     label=text.render(INFO_TEXT + str(score),1,(255,255,255))
     panel.blit(label,(TEXT_MARIGN,TEXT_MARIGN))
     s.draw()
-    if a.rect.colliderect(s[0]):
+    if a.rect.colliderect(s.get_head()):
         s.grow()
         a.put()
         score+=1

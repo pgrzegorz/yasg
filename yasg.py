@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import pygame
 import random
@@ -9,6 +9,7 @@ RESY=600
 PANEL_HEIGHT=40
 INFO_TEXT="SCORE: "
 TEXT_MARIGN=2
+SLEEP=150
 
 class Snake(list):
     def __init__(self,screen,length=2,size=20,color=(255,255,255),width=0):
@@ -116,5 +117,5 @@ while True:
     screen.blit(board,(0,PANEL_HEIGHT))
     screen.blit(panel,(0,0))
     pygame.display.flip()
-    pygame.time.wait(150)
+    pygame.time.wait(SLEEP)
 
